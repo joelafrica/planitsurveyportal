@@ -12,18 +12,31 @@ var formSubmitting = false;
 var setFormSubmitting = function() { formSubmitting = true; };
 
 window.onload = function() {
-    window.addEventListener("beforeunload", function (e) {
-        var confirmationMessage = 'It looks like you have been editing something. ';
-        confirmationMessage += 'If you leave before saving, your changes will be lost.';
+    if (window.addEventListener) {
+	    window.addEventListener("beforeunload", function (e) {
+	        var confirmationMessage = 'It looks like you have been editing something. ';
+	        confirmationMessage += 'If you leave before saving, your changes will be lost.';
+	        if ((formSubmitting) || (typeof document.Answer == 'undefined')){
+	            return undefined;
+	        }
 
-        if ((formSubmitting) || (typeof document.Answer == 'undefined')){
-            return undefined;
-        }
+	        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+	        return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+	    });
+	    //handle ie8 and lower
+	} else if (window.attachEvent) {
+		window.attachEvent("onbeforeunload", function (e) {
+	        var confirmationMessage = 'It looks like you have been editing something. ';
+	        confirmationMessage += 'If you leave before saving, your changes will be lost.';
+	        if ((formSubmitting) || (typeof document.Answer == 'undefined')){
+	            return undefined;
+	        }
 
-        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-        return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
-    });
-};
+	        (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+	        return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+		});
+	}
+}
 
 </script>
 
