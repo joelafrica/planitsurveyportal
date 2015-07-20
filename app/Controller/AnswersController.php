@@ -9,14 +9,9 @@ class AnswersController extends AppController {
 		$server_security_key = 'j1o9e2l5@it03chy05';
 		$token = urldecode($this->request->query['token']);
 		
-		try {
-			$token_info = JWT::decode($token, '$server_security_key');
-		} catch (Exception $e) {
-			$this->Session->setFlash('Access denied.  Token is either expired or invalid. Please contact Planit to get a valid token.', 'default', array(), 'processing_msg_err');
-			exit();
-		}	
+		$token_info = JWT::decode($token, '$server_security_key');
 		
-		try {
+
 			//if method = post, validate and load posted answers. save if validation successful 
 			if ($this->request->is('post')){
 				
@@ -43,20 +38,18 @@ class AnswersController extends AppController {
 									$this->set('questions', $validatedPostResults['PostedQuestionsAnswers']);
 									//for validation
 									$this->set('error_messages', $validatedPostResults['Errors']);
+									$this->set('tokeninfo', $token_info);
 								}
-												break;
+								break;
 								}
 				
 			//else, load answers from database	
 			} else {
 		 		$dbAnswersWithQuestions = $this->loadAnswers($token_info->userid, $token_info->surveyid);
 				$this->set('questions', $dbAnswersWithQuestions);						
+				$this->set('tokeninfo', $token_info);
 			}
-		} catch (Exception $e) {
-			$this->Session->setFlash('There was a problem processing your request.  Servers may be unavailable.  Please try again later or contact Planit Support', 'default', array(), 'processing_msg_err');
-			exit();
 		
-		}
 			
     }
 
@@ -66,13 +59,8 @@ class AnswersController extends AppController {
 		$server_security_key = 'j1o9e2l5@it03chy05';
 		$token = urldecode($this->request->query['token']);
 		
-		try {	
-			$token_info = JWT::decode($token, '$server_security_key');
-		} catch (Exception $e) {
-			$this->Session->setFlash('Access denied.  Token is either expired or invalid. Please contact Planit to get a valid token.', 'default', array(), 'processing_msg_err');
-			exit();
-		}	
-		try {	
+		$token_info = JWT::decode($token, '$server_security_key');
+		
 		
 			$postedAnswers = $this->params['postedAnswers'];
 			$actionButton = (isset($postedAnswers['submit']) ? 'submit' : 'save');
@@ -86,10 +74,7 @@ class AnswersController extends AppController {
         			'action' => $actionButton)
         		)
    			 ); 
-		} catch (Exception $e) {
-			$this->Session->setFlash('There was a problem processing your request.  Servers may be unavailable.  Please try again later or contact Planit Support', 'default', array(), 'processing_msg_err');
-			exit();
-		}
+		
 	} 
 	
 	public function confirmation() {
@@ -98,20 +83,16 @@ class AnswersController extends AppController {
 		$server_security_key = 'j1o9e2l5@it03chy05';
 		$token = urldecode($this->request->query['token']);
 		
-		try {	
-			$token_info = JWT::decode($token, '$server_security_key');
-		} catch (Exception $e) {
-			$this->Session->setFlash('Access denied.  Token is either expired or invalid. Please contact Planit to get a valid token.', 'default', array(), 'processing_msg_err');
-			exit();
-		}	
-		try {
+		$token_info = JWT::decode($token, '$server_security_key');
+		
 			if ($this->request->is('post')){
 				$timestamp = date('Y-m-d G:i:s');
 				$this->Answer->create();
 				$this->Answer->updateAll(
 						array('Answer.submission_date' => "'".$timestamp."'"), 
 						array('Answer.user_id' => $token_info->userid, 'survey_id' => $token_info->surveyid));
-				$this->Session->setFlash('You have completed the survey.  Thank you.', 'default', array(), 'processing_msg_success');
+				$this->set('sucess_msg', 'Your feedback has been sent to Planit.  Thank you for taking your time in completing the survey.');
+				//$this->Session->setFlash('You have completed the survey.  Thank you.', 'default', array(), 'processing_msg_success');
 				
 			} else {			
 				$action = $this->request->query['action'];
@@ -124,17 +105,10 @@ class AnswersController extends AppController {
 								break;
 				}		
 			}
-		} catch (Exception $e) {
-			$this->Session->setFlash('There was a problem processing your request.  Servers may be unavailable.  Please try again later or contact Planit Support', 'default', array(), 'processing_msg_err');
-			exit();
-		}
-		
-		
-		
-	
+		$this->set('tokeninfo', $token_info);
 	}
 	
-	
+
 	//HELPER METHODS
 	
 	private function loadAnswers ($user_id, $survey_id) {

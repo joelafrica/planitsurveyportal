@@ -1,13 +1,18 @@
 <?php
 
+if (!empty($tokeninfo)){
+			echo "<div class='tokenheader'><span>".$tokeninfo->surveyname."</span></div>";
+}
+
+
 if ($this->Session->check('Message.processing_msg_err')) {
 	
 	echo $this->Session->flash('processing_msg_err');
 	
 } else {
-	if ($this->Session->check('Message.processing_msg_success')) {
+	if (!empty($sucess_msg)) {
 	
-		echo $this->Session->flash('processing_msg_success');
+		echo "<div class='container'>".$sucess_msg."</div>";
 	
 	} else {
 	
@@ -15,20 +20,20 @@ if ($this->Session->check('Message.processing_msg_err')) {
 	
 		switch ($action) {
 			case "save":
-						echo "<div>";
+						echo "<div class='container'>";
 								echo "Thank you for taking part in this important survey.  
 										Your survey data have been saved.   
-										You have chosen not to submit the survey at this time.
-										You can resume the survey by going to the link below:";
+										You have chosen not to complete the survey at this time.
+										You can resume the survey at your convenience by following the link sent to your e-mail by Planit.";
 						echo "</div>";
 						break;
 			case "submit":
-						echo "<div>";
+						echo "<div class='container'>";
 								echo "Thank you for taking part in this important survey.  
 										Your survey data have been saved.
 										Press Confirm to complete the survey.  
 										If you choose not to submit the survey at this time,
-										you can resume the survey by going to the link below:";
+										you can resume the survey at your convenience by following the link sent to your e-mail by Planit.";
 						echo "</div>";
 						echo "<div class='commitbuttons'>";
 							echo $this->Form->submit('Confirm', array(

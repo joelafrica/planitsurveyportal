@@ -42,4 +42,9 @@ class AppController extends Controller {
     	$this->layout = 'surveyportal';
 	}
 
+	//public function appError ($error) {
+	//	$this->redirect(
+	//			array('controller' => 'Users', 'action' => 'portalError'));
+	//}
+
 }

@@ -51,6 +51,7 @@ html, body {
 	max-height: 100px;
 	position: relative;
 }
+
 #container {
 	width: 900px;
 	margin: 0 auto;
@@ -61,7 +62,7 @@ html, body {
 	border-top: 2px solid #DEE4E4;
 	border-bottom: 2px solid #DEE4E4;
 	min-height: 70%;
-	overflow: auto;
+	
 }
 
 #footer {
@@ -87,11 +88,13 @@ html, body {
 
 #header .headertext {
 	font-family: ProximaNova-Regular, Helvetica, sans-serif;
+	font-weight: bold;
 	font-size: 22px;
 	padding-left: 170px; 
 	padding-top: 3px;
 	color: #4747D1; 
 }
+
 #header .headersubtext {
 	font-family: ProximaNova-Regular, Helvetica, sans-serif;
 	font-size: 18px;
@@ -124,18 +127,18 @@ html, body {
 }
 
 .container { 
-	width: 890px; 
+	max-width: 900px;
 	height: 100%;
 	overflow: auto;
 	float: center; 
 	margin: 10px 0; 
 	font-family: ProximaNova-Regular, Helvetica, sans-serif;
 	font-size: 10pt;
-	padding-top: 3px;
-    padding-right: 10px;
-    padding-bottom: 3px;
-    padding-left: 10px;
-    background-color: #718EE8;
+	padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    background-color: #F0FAFF;
 }
 
 .container .onecolumn { 
@@ -144,25 +147,77 @@ html, body {
 }
 
 .container .twocolumn { 
-	width: 50%; 
+	width: 49.9%; 
 	float: left; 
+}
+
+.tokenheader {
+	max-width: 890px;
+	height: 100%;
+	overflow: auto;
+	float: center; 
+	margin: 10px 0; 
+	font-family: ProximaNova-Regular, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #4747D1;
+	font-size: 16px;
+	padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    background-color: #B8DCFF;
+}
+
+.mainerrorcontainer {
+	max-width: 890px;
+	height: 100%;
+	overflow: auto;
+	float: center; 
+	margin: 10px 0; 
+	font-family: ProximaNova-Regular, Helvetica, sans-serif;
+	font-weight: bold;
+	color: black;
+	font-size: 10pt;
+	padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    background-color: #FF5C5C;
 }
 
 .question {
 	font-family: ProximaNova-Regular, Helvetica, sans-serif;
 	font-weight: bold;
-	width: 890px; 
+	max-width: 890px; 
 }
 
-.mainerror {
-	font-family: ProximaNova-Regular, Helvetica, sans-serif;
-	font-weight: bold;
-	color: red;
-}
 
 .error {
 	font-family: ProximaNova-Regular, Helvetica, sans-serif;
 	color: red;
+	width: 100%; 
+	float: left; 
+}
+
+#submit, #save, #confirm {
+	font-family: ProximaNova-Regular, Helvetica, sans-serif;
+    width: 18em;  height: 1.8em;
+}
+
+.commitbuttons {
+	width: 900px; 
+	overflow: auto;
+	float: center; 
+	padding-left: 20px;
+}
+.commitbuttons > div{
+	width: 35%; 
+	float: left; 
+}
+
+.div-spacer {
+	width: 100%; 
+	float: left;
 }
 
 </style>

@@ -32,6 +32,7 @@ class UsersController extends AppController {
 		}		
 	}	
 	
+
 	public function getTokens() {
 		App::uses('JWT', 'Vendor');
 		
@@ -48,7 +49,7 @@ class UsersController extends AppController {
 			$token_arr ['username'] = $value['User']['user_name'];
 			$token_arr ['longnam'] = $value['User']['long_name'];
 			$token_arr ['surveyid'] = 1;
-			$token_arr ['surveyname'] = "Tech Survey";			
+			$token_arr ['surveyname'] = "Planit Technology Survey";			
 			
 			$token = urlencode(JWT::encode($token_arr, '$server_security_key'));
 			

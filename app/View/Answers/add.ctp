@@ -2,16 +2,16 @@
 
 <?php 
 
-if ($this->Session->check('Message.processing_msg_err')) {
-	
-	echo $this->Session->flash('processing_msg_err');
-	
-} else {
+
 	
 	if (!empty($questions)) {
-		
+		if (!empty($tokeninfo)){
+			echo "<div class='tokenheader'><span>".$tokeninfo->surveyname."</span></div>";
+		}
+
+
 		if (!empty($error_messages)){
-			echo "<div class='onecolumn'><span class='mainerror'>"."There are validation errors.  Please review your answers"."</span></div>";
+			echo "<div class='mainerrorcontainer'><span>"."There are validation errors.  Please review your answers"."</span></div>";
 		}
 		
 		echo $this->Form->create('Answer', array('name' => 'Answer', 'onSubmit' => 'setFormSubmitting()'));
@@ -23,7 +23,7 @@ if ($this->Session->check('Message.processing_msg_err')) {
 					$columnstyle = ($questions[$x]['Question']['column_style'] > 1 ? "twocolumn" : "onecolumn");
 					echo "<div class='container'>";
 					
-					echo "<div class='question'>Question ".$q_number.".  ".$questions[$x]['Question']['description']."</div>"."<br>";
+					echo "<div class='question'>Question ".$q_number.".  ".$questions[$x]['Question']['description']."</div>"."<br/>";
 			
 						//print options
 						$options_answers = $questions[$x]['Question']['Options_Answers'];
@@ -38,7 +38,7 @@ if ($this->Session->check('Message.processing_msg_err')) {
 											$input_label = $value['Option']['description'];
 											echo "<div class='".$div_class."' >";
 											echo $this->Form->checkbox($questionid."-".$input_optionid, $option_value);
-											echo $this->Form->label($input_optionid, $input_label);
+											echo $this->Form->label($input_optionid, $input_label, array('for' => 'Answer'.$questionid.'-'.$input_optionid));
 											echo "</div>";
 											break;
 								case "radio":
@@ -48,7 +48,7 @@ if ($this->Session->check('Message.processing_msg_err')) {
 											echo "<div class='".$div_class."' >";
 											//echo $this->Form->checkbox($questionid);
 											echo $this->Form->radio($questionid, array($input_optionid =>''),$attr_value,array());
-											echo $this->Form->label($questionid, $input_label);
+											echo $this->Form->label($questionid, $input_label, array('for' => 'Answer'.$questionid.$input_optionid));
 											echo "</div>";
 											break;
 								case "text":
@@ -57,38 +57,31 @@ if ($this->Session->check('Message.processing_msg_err')) {
 											$input_label = $value['Option']['description'];
 											echo "<div class='".$div_class."' >";
 											echo $this->Form->label($input_optionid, $input_label);
+											echo "<br>";
 											echo $this->Form->text($questionid."-".$input_optionid, $option_value);
 											echo "</div>";
 											break;
 							}
 						}
+					
+					
+						
 					if (!empty($error_messages[$questions[$x]['Question']['id']])){
-						echo "<div class='onecolumn'><span class='error'>".$error_messages[$questions[$x]['Question']['id']]."</span></div>";
+						echo "<div class='div-spacer'>&nbsp;</div>";
+						echo "<div class='error'>".$error_messages[$questions[$x]['Question']['id']]."</div>";
 					}
 					echo "</div>";
+
 				} 
 				echo "<div class='commitbuttons'>";
-					echo $this->Form->submit('Submit', array(
-						'id' => 'submit', 'name' => 'submit'));
-					echo $this->Form->submit('Save', array(
-						'id' => 'save', 'name' => 'save'));
+					echo "<div>".$this->Form->submit('Complete Later', array(
+						'id' => 'save', 'name' => 'save'))."</div>";
+					echo "<div>".$this->Form->submit('Submit to Planit', array(
+						'id' => 'submit', 'name' => 'submit'))."</div>";
 				echo "</div>";
+				echo "<br>";
 
 		echo $this->Form->end();
 		
 	}
-}
-
-/*
-//for debugging
-function print_array($aArray) {
- //Print a nicely formatted array representation:
-echo '<pre>';
-  print_r($aArray);
-  echo '</pre>';
-}
-
-print_array($error_messages);
-print_array($questions);
-*/
 ?>
