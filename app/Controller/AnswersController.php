@@ -176,7 +176,7 @@ class AnswersController extends AppController {
  								//for validation
  								switch ($questions[$x]['Question']['control_type']){
  									case "text": 
- 												if (empty(trim($answer_value['Answer'][0]['answer_text'])) &&
+ 												if (!strlen(trim($answer_value['Answer'][0]['answer_text'])) &&
  													$questions[$x]['Question']['mandatory_flag'] == 'Y') {
  													$text_error_required = true;
  												}
