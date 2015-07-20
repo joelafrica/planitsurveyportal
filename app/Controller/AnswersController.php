@@ -6,7 +6,7 @@ class AnswersController extends AppController {
     public function add() {
         App::uses('JWT', 'Vendor');
 		
-		$server_security_key = 'j1o9e2l5@it03chy05';
+		$server_security_key = Configure::read('Security.key');
 		$token = urldecode($this->request->query['token']);
 		
 		$token_info = JWT::decode($token, '$server_security_key');
@@ -56,7 +56,7 @@ class AnswersController extends AppController {
 	public function save() {
     	App::uses('JWT', 'Vendor');
 		
-		$server_security_key = 'j1o9e2l5@it03chy05';
+		$server_security_key = Configure::read('Security.key');
 		$token = urldecode($this->request->query['token']);
 		
 		$token_info = JWT::decode($token, '$server_security_key');
@@ -80,7 +80,7 @@ class AnswersController extends AppController {
 	public function confirmation() {
 		App::uses('JWT', 'Vendor');
 		
-		$server_security_key = 'j1o9e2l5@it03chy05';
+		$server_security_key = Configure::read('Security.key');
 		$token = urldecode($this->request->query['token']);
 		
 		$token_info = JWT::decode($token, '$server_security_key');

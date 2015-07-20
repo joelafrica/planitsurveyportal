@@ -113,7 +113,7 @@
  * will override the automatic detection of full base URL and can be
  * useful when generating links from the CLI (e.g. sending emails)
  */
-	//Configure::write('App.fullBaseUrl', 'http://example.com');
+	Configure::write('App.fullBaseUrl', 'http://localhost');
 
 /**
  * Web path to the public images directory under webroot.
@@ -228,6 +228,12 @@
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
 	Configure::write('Security.cipherSeed', '19251950197297910305972707036');
+
+
+/**
+ * server_security_key for jwt encoding / decoding.
+ */
+	Configure::write('Security.key', 'j1o9e2l5@it03chy05');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).
