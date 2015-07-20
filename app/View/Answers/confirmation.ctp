@@ -24,7 +24,7 @@ if ($this->Session->check('Message.processing_msg_err')) {
 								echo "Thank you for taking part in this important survey.  
 										Your survey data have been saved.   
 										You have chosen not to complete the survey at this time.
-										You can resume the survey at your convenience by following the link sent to your e-mail by Planit.";
+										Resume the survey at your convenience, by following the link sent to your e-mail by Planit.";
 						echo "</div>";
 						break;
 			case "submit":
@@ -33,7 +33,7 @@ if ($this->Session->check('Message.processing_msg_err')) {
 										Your survey data have been saved.
 										Press Confirm to complete the survey.  
 										If you choose not to submit the survey at this time,
-										you can resume the survey at your convenience by following the link sent to your e-mail by Planit.";
+										resume the survey at your convenience by following the link sent to your e-mail by Planit.";
 						echo "</div>";
 						echo "<div class='commitbuttons'>";
 							echo $this->Form->submit('Confirm', array(
