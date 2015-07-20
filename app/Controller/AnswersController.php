@@ -91,7 +91,7 @@ class AnswersController extends AppController {
 				$this->Answer->updateAll(
 						array('Answer.submission_date' => "'".$timestamp."'"), 
 						array('Answer.user_id' => $token_info->userid, 'survey_id' => $token_info->surveyid));
-				$this->set('sucess_msg', 'Your feedback has been sent to Planit.  Thank you for taking your time in completing the survey.');
+				$this->set('sucess_msg', 'Your survey data have been sent to Planit.  Thank you for taking your time in completing the survey.');
 				//$this->Session->setFlash('You have completed the survey.  Thank you.', 'default', array(), 'processing_msg_success');
 				
 			} else {			
@@ -180,7 +180,7 @@ class AnswersController extends AppController {
  													$questions[$x]['Question']['mandatory_flag'] == 'Y') {
  													$text_error_required = true;
  												}
-												if (!is_numeric(trim($answer_value['Answer'][0]['answer_text'])) &&
+												if (!ctype_digit(trim($answer_value['Answer'][0]['answer_text'])) &&
 													$option_value['Option']['type'] == 'numeric') {	
 													$text_error_numeric = true;
 												}
