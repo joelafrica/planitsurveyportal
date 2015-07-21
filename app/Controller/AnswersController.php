@@ -150,6 +150,7 @@ class AnswersController extends AppController {
 	
 	}
 	
+	//jafrica - this is dirty code, refactor this
 	private function validateAndLoadAnswers ($posted_data, $user_id, $survey_id){
 				
 				$validated_answers = array();
