@@ -212,7 +212,7 @@ html, body {
 	float: left; 
 }
 
-#submit, #save, #confirm {
+#submit, #save, #confirm, #cancel {
 	font-family: ProximaNova-Regular, Helvetica, sans-serif;
     width: 18em;  height: 1.8em;
 }

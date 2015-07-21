@@ -86,13 +86,24 @@ class AnswersController extends AppController {
 		$token_info = JWT::decode($token, '$server_security_key');
 		
 			if ($this->request->is('post')){
-				$timestamp = date('Y-m-d G:i:s');
-				$this->Answer->create();
-				$this->Answer->updateAll(
-						array('Answer.submission_date' => "'".$timestamp."'"), 
-						array('Answer.user_id' => $token_info->userid, 'survey_id' => $token_info->surveyid));
-				$this->set('sucess_msg', 'Your survey data have been sent to Planit.  Thank you for providing your time in completing the survey.');
-				//$this->Session->setFlash('You have completed the survey.  Thank you.', 'default', array(), 'processing_msg_success');
+				
+				$actionButton = (isset($this->request->data['confirm']) ? 'confirm' : 'cancel');
+
+				switch ($actionButton) {
+					case 'cancel':
+									$this->set('sucess_msg', 'You chose not to submit the survey at this time.  Resume the survey at your convenience by following the link sent to your e-mail by Planit.');
+									break;
+					case 'confirm':
+									$timestamp = date('Y-m-d G:i:s');
+									$this->Answer->create();
+									$this->Answer->updateAll(
+											array('Answer.submission_date' => "'".$timestamp."'"), 
+											array('Answer.user_id' => $token_info->userid, 'survey_id' => $token_info->surveyid));
+									$this->set('sucess_msg', 'Your survey data have been sent to Planit.  Thank you for providing your time in completing the survey.');
+									//$this->Session->setFlash('You have completed the survey.  Thank you.', 'default', array(), 'processing_msg_success');
+									break;
+				}
+				
 				
 			} else {			
 				$action = $this->request->query['action'];
