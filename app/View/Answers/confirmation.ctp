@@ -32,8 +32,7 @@ if ($this->Session->check('Message.processing_msg_err')) {
 								echo "Thank you for taking part in this important survey.  
 										Your survey data have been saved.
 										Press Confirm to complete the survey.  
-										Press Cancel if you choose not to submit the survey at this time and
-										resume the survey at your convenience by following the link sent to your e-mail by Planit.";
+										Press Cancel if you choose not to submit the survey at this time.";
 						echo "</div>";
 						echo "<div class='commitbuttons'>";
 							echo "<div>".$this->Form->submit('Cancel', array(
