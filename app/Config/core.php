@@ -113,8 +113,9 @@
  * will override the automatic detection of full base URL and can be
  * useful when generating links from the CLI (e.g. sending emails)
  */
-	Configure::write('App.fullBaseUrl', 'http://localhost');
-
+	/** Configure::write('App.fullBaseUrl', 'http://localhost'); **/
+	/** Updated by Patrick Caceres, August 4, 2015 **/
+	Configure::write('App.fullBaseUrl', 'http://planit.guru/');
 /**
  * Web path to the public images directory under webroot.
  * If not set defaults to 'img/'
